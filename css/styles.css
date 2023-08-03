@@ -16,6 +16,9 @@
 .card{
     border: 1px solid black;
     height: 30px;
+    
 
 }
-
+.card :hover{
+    background-color: red;
+}

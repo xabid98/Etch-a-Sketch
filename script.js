@@ -10,6 +10,15 @@ for (let j = 0; j < 16; j++) {
         let div = document.createElement("div");
         div.classList.add('card')   
         div.style.width=`${m}px`
-        container.appendChild(div)    
+        container.appendChild(div)  
+
+        div.addEventListener('mouseenter', () => {
+            div.style.backgroundColor='red';
+        })
+        div.addEventListener('mouseleave', () => {
+            div.style.backgroundColor='white';
+        })
+        
+
     }
 }
