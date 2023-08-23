@@ -1,24 +1,43 @@
-const container=document.getElementById('container')
+const grid = document.querySelector(".container");
+const size = document.getElementById("size");
+const resetButton = document.querySelector(".reset");
 
+createGrid = () => {
+  for (let i = 0; i < 256; i++) {
+    const div = document.createElement("div");
+    div.classList.add("square");
+    grid.appendChild(div);
+  }
+};
 
-let div = document.createElement("div");
-div.classList.add('card')
+updateGrid = () => {
+  grid.innerHTML = "";
 
-for (let j = 0; j < 16; j++) {    
-    for (let i = 0; i < 16; i++) {
-        let m=480/16
-        let div = document.createElement("div");
-        div.classList.add('card')   
-        div.style.width=`${m}px`
-        container.appendChild(div)  
+  container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    container.style.gridTemplateRows = `repeat(${size}, 1fr)`; 
+  grid.style.setProperty("grid-template-columns",`repeat(${size.value}, 2fr)`);
+  grid.style.setProperty("grid-template-rows",`repeat(${size.value}, 2fr)`);
+  for (let i = 0; i < size.value * size.value; i++) {
+    const div = document.createElement("div");
+    div.classList.add("square");
+    grid.appendChild(div);
+  }
+  console.log(size.value);
+};
 
-        div.addEventListener('mouseenter', () => {
-            div.style.backgroundColor='red';
-        })
-        div.addEventListener('mouseleave', () => {
-            div.style.backgroundColor='white';
-        })
-        
+const square = document.querySelector("div");
+square.addEventListener("mouseover", function(event) {
+  event.target.classList.replace("square", "color");
+});
 
-    }
-}
+size.addEventListener("change", updateGrid);
+
+resetButton.addEventListener("click", function() {
+  grid.innerHTML = "";
+  size.value = "";
+  grid.style.setProperty("grid-template-columns", `repeat(16, 2fr)`);
+  grid.style.setProperty("grid-template-rows", `repeat(16, 2fr)`);
+  createGrid();
+});
+
+createGrid();
